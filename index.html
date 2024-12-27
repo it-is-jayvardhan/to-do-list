@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> To-Do List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #67c886;
+            border-color: #67c886;
+        }
+        .list-group-item {
+            background-color: #eef7ee;
+            border: 1px solid #67c886;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .input-group-text, .form-control {
+            background-color: #f1f1f1;
+            border: 1px solid #ced4da;
+        }
+        .input-group-text {
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+        }
+        h1 {
+            color: #343a40;
+        }
+        .priority-high {
+            color: red;
+        }
+        .priority-medium {
+            color: orange;
+        }
+        .priority-low {
+            color: green;
+        }
+        .overdue {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .task-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .task-actions {
+            display: flex;
+            align-items: center;
+        }
+        .task-actions button {
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .input-group .form-control, .input-group .input-group-append {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .input-group .input-group-append {
+                margin-bottom: 0;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">To-Do List</h1>
+        <div class="input-group mb-3">
+            <input type="text" id="todoInput" class="form-control" placeholder="Enter a new task">
+            <input type="date" id="dueDateInput" class="form-control" placeholder="Due Date" min="">
+            <select id="priorityInput" class="form-control">
+                <option value="low">Low Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="high">High Priority</option>
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="addTaskBtn">Add Task</button>
+            </div>
+        </div>
+        <ul class="list-group" id="todoList"></ul>
+    </div>
+    <script type="module" src="./dist/index.js"></script>
+   
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBMgC3VKmlFNxLQCeBjGo319u8ORzAVMi0",
+      authDomain: "personal-project-61eb7.firebaseapp.com",
+      projectId: "personal-project-61eb7",
+      storageBucket: "personal-project-61eb7.firebasestorage.app",
+      messagingSenderId: "922860742722",
+      appId: "1:922860742722:web:fbe1764ebd57f52f1c65db",
+      measurementId: "G-9YMY17865H"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Set the minimum date to today's date for the due date input
+    const dueDateInput = document.getElementById('dueDateInput');
+    const today = new Date().toISOString().split('T')[0];
+    dueDateInput.min = today;
+
+    // Workaround for placeholder issue on mobile devices
+    const dueDatePlaceholder = "Due Date";
+    dueDateInput.addEventListener("focus", function() {
+        if (dueDateInput.value === dueDatePlaceholder) {
+            dueDateInput.value = "";
+            dueDateInput.style.color = "#495057";
+        }
+    });
+    dueDateInput.addEventListener("blur", function() {
+        if (dueDateInput.value === "") {
+            dueDateInput.value = dueDatePlaceholder;
+            dueDateInput.style.color = "#6c757d";
+        }
+    });
+    dueDateInput.value = dueDatePlaceholder;
+    dueDateInput.style.color = "#6c757d";
+
+</script> 
+</body>
+</html>

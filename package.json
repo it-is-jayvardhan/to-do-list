@@ -1,0 +1,18 @@
+{
+  "name": "ts-helloworld",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bun build index.ts --outdir ./dist",
+    "watch": "nodemon --watch index.ts --exec \"bun run build\""
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "manifest-creator": "^0.0.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

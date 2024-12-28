@@ -1,0 +1,6 @@
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "ignore": ["dist"],
+    "exec": "bun build index.ts --outdir ./dist && bun dist/index.js"
+}
